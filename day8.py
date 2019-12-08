@@ -30,7 +30,7 @@ print(best[1] * best[2])
 
 #### Part 2
 final_img = image[-1]
-for i in range(len(image) - 2, 0, -1):
+for i in range(len(image) - 2, -1, -1):
     layer = image[i]
     for y in range(HEIGHT):
         for x in range(WIDTH):
