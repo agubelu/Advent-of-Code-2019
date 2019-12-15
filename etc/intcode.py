@@ -125,3 +125,8 @@ class IntcodeComputer:
         while not self.finished:
             res = self.get_next_output()
         return res
+
+def from_file(path):
+    with open(path, "r") as f:
+        code = [int(x) for x in f.read().strip().split(",")]
+    return IntcodeComputer(code)
