@@ -7,6 +7,10 @@ class IntcodeComputer:
         self.pointer = 0
         self.last_return = None
         self.rel_offset = 0
+        self.funcargs = []
+
+    def set_funcargs(self, funcargs):
+        self.funcargs = funcargs
 
     def set_inputs(self, inputs):
         self.inputs = inputs
@@ -15,7 +19,12 @@ class IntcodeComputer:
         if type(self.inputs[0]) is int:
             return self.inputs.pop(0)
         else:
-            return self.inputs[0]()
+            val = self.inputs[0](*self.funcargs)
+            if type(val) is int:
+                return val
+            else:
+                self.inputs = val + self.inputs
+                return self.inputs.pop(0)
 
     def _process_cmd(self, pos):
         cmd = str(self.code.get(pos, 0))
